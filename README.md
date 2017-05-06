@@ -2,9 +2,10 @@
 
 Complete docker container with Nginx 1.10 & PHP-FPM 7.1 & MariaDB
 
-Lightweight WordPress container with Nginx 1.10 & PHP-FPM 7.1 based on Alpine Linux.
-
 _WordPress version currently installed:_ **4.7.4**
+
+## Copy Backup
+I use BackWPup plugin for my backups. Copy your backup file in format `*.sql.gz`  in the docker folder and create the docker container. The backup file will be uncompressed, copied and installed into the wordpress docker container. 
 
 ## Create
 
