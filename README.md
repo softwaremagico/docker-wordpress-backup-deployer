@@ -6,9 +6,6 @@ Lightweight WordPress container with Nginx 1.10 & PHP-FPM 7.1 based on Alpine Li
 
 _WordPress version currently installed:_ **4.7.4**
 
-
-[![Docker Pulls](https://img.shields.io/docker/pulls/trafex/wordpress.svg)](https://hub.docker.com/r/trafex/wordpress/) [![](https://images.microbadger.com/badges/image/trafex/wordpress.svg)](https://microbadger.com/images/trafex/wordpress "Get your own image badge on microbadger.com")
-
 ## Create
 
 	docker build docker-wordpress-mysql -t wordpress
