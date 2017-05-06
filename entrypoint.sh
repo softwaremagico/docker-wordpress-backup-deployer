@@ -20,8 +20,13 @@ set -e
     MYSQL_RANDOM_ROOT_PASSWORD=`pwgen -s 40 1`
     MYSQL_WORDPRESS_USER="wordpress"
     MYSQL_WORDPRESS_USER_PASSWORD=`pwgen -s 40 1`
-    MYSQL_WORDPRESS_DATABASE="wordpress"
-    DOMAIN="localhost"
+    MYSQL_WORDPRESS_DATABASE="wordpress"    
+    
+    #Get domain from variable set at docker run or use default value.
+    if [ -z ${DOMAIN} ]; 
+    then
+	DOMAIN="localhost"
+    fi
     
     #Create mysql user
     mysql -e "CREATE DATABASE ${MYSQL_WORDPRESS_DATABASE};"
@@ -44,10 +49,10 @@ set -e
     
     #Restore backup
     sed -i "1 s/^/USE ${MYSQL_WORDPRESS_DATABASE};\n/" /usr/src/wordpress/database_backup.sql
-    sed -i -e "s/\(1, '\''siteurl'\'', '\''.*'\'', '\''yes'\''\)/1, '\''siteurl'\'', '\''${DOMAIN}'\'', '\''yes'\''/g" /usr/src/wordpress/database_backup.sql
-    sed -i -e "s/\(36, '\''home'\'', '\''.*'\'', '\''yes'\''\)/36, '\''home'\'', '\''${DOMAIN}'\'', '\''yes'\''/g" /usr/src/wordpress/database_backup.sql
+    sed -i -e "s|'siteurl', '.*', 'yes'|'siteurl', '${DOMAIN}', 'yes'|g" /usr/src/wordpress/database_backup.sql
+    sed -i -e "s|'home', '.*', 'yes'|'home', '${DOMAIN}', 'yes'|g" /usr/src/wordpress/database_backup.sql
     mysql -uroot -p${MYSQL_RANDOM_ROOT_PASSWORD} < /usr/src/wordpress/database_backup.sql
-    rm -f /usr/src/wordpress/database_backup.sql
+    #rm -f /usr/src/wordpress/database_backup.sql
     
 #fi
 exec "$@"
