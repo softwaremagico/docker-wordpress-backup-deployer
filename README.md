@@ -23,7 +23,9 @@ The database password for root and wordpress user are randmly generated on each 
     docker logs <container>
 
 And find this lines
+
     GENERATED ROOT PASSWORD AS 'x7tiZcRi7DhZGc3B2mDy4Qb9rOheQX8Qfubd9ZZr'
+    
     GENERATED WORDPRESS USER PASSWORD AS 'amOICpa05KYHzaipnaXANxAeg0XgWqHrO4d9ARWD'
 
 ### Forked from
