@@ -5,6 +5,7 @@ It automatically deploys a backup file from Wordpress and updates all settings.
 
 ## Backup
 Copy the backup file with format <name>_wordpress_backup_<date>.tar.gz in this container folder. Build the container and run it. The backup will be copied and installed automatically. 
+I use BackWPup plugin for my backups. Copy your backup file in format `*.sql.gz`  in the docker folder and create the docker container. The backup file will be uncompressed, copied and installed into the wordpress docker container. 
 
 ## Build
 
