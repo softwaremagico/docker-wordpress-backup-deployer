@@ -1,4 +1,4 @@
-# WordPress Docker for quick deploying of a Wordpress backup.
+# Docker container for quick deploying of a Wordpress backup.
 
 Complete docker container with Nginx 1.10 & PHP-FPM 7.1 & MariaDB based on Alpine Linux.
 It automatically deploys a backup file from Wordpress and updates all settings.
