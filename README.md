@@ -11,11 +11,11 @@ Copy the backup file with format <name>_wordpress_backup_<date>.tar.gz in this c
     docker build docker-wordpress-mysql -t wordpress
 
 ## Usage
-    docker run -d -p 80:80 -e "DOMAIN=http://site.com" -v /local/folder:/var/www/wp-content wordpress
+    docker run -d --name wordpress -p 80:80 -e "DOMAIN=http://site.com" -v /local/folder:/var/www/wp-content wordpress
     
 Or without a volume
     
-    docker run -d -p 80:80 -e "DOMAIN=http://site.com" wordpress
+    docker run -d --name wordpress -p 80:80 -e "DOMAIN=http://site.com" --restart always wordpress
     
 Where "http://site.com" is the domain (or IP) that points to this docker container. 
     
