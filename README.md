@@ -8,7 +8,7 @@ Copy the backup file with format <name>_wordpress_backup_<date>.tar.gz in this c
 
 ## Build
 
-    docker build ddocker-wordpress-backup-deployer -t wordpress
+    docker build docker-wordpress-backup-deployer -t wordpress
 
 ## Usage
     docker run -d --name wordpress -p 80:80 -e "DOMAIN=http://site.com" -v /local/folder:/var/www/wp-content wordpress
