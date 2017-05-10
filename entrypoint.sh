@@ -53,6 +53,7 @@ set -e
     sed -i -e "s|'home', '.*', 'yes'|'home', '${DOMAIN}', 'yes'|g" /usr/src/wordpress/database_backup.sql
     mysql -uroot -p${MYSQL_RANDOM_ROOT_PASSWORD} < /usr/src/wordpress/database_backup.sql
     rm -f /usr/src/wordpress/database_backup.sql
+    chown nobody:nobody -R /usr/src/wordpress/*
     
 #fi
 exec "$@"
