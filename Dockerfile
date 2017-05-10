@@ -1,5 +1,5 @@
 FROM alpine:latest
-LABEL Maintainer="Tim de Pater <code@trafex.nl>" \
+LABEL Maintainer="Jorge Hortelano" \
       Description="Lightweight WordPress container with Nginx 1.10 & PHP-FPM 7.1 based on Alpine Linux."
 
 # Install packages from testing repo's
