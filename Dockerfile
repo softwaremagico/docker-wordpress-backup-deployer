@@ -1,7 +1,7 @@
 FROM alpine:latest
 LABEL Maintainer="Jorge Hortelano" \
       Description="Lightweight WordPress container with Nginx 1.10 & PHP-FPM 7.1 & MariaDB based on Alpine Linux."
-
+ 
 # Install packages from testing repo's
 RUN apk --no-cache add php7 php7-fpm php7-mysqli php7-json php7-openssl php7-curl \
     php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-ctype \
@@ -23,8 +23,6 @@ WORKDIR /var/www/wp-content
 RUN chown -R nobody.nobody /var/www
 
 #MySQL
-VOLUME /var/lib/mysql
-RUN chown -R mysql.mysql /var/lib/mysql
 RUN /usr/bin/mysql_install_db --user=mysql \
     && cp /usr/share/mysql/mysql.server /etc/init.d/mysqld
 
@@ -59,10 +57,12 @@ RUN rm -f /tmp/backup/wp-config.php \
 
 # Entrypoint to copy wp-content
 COPY entrypoint.sh /entrypoint.sh
-    
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 
 EXPOSE 80
+
+#MySQL VOLUME
+VOLUME /var/lib/mysql
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
