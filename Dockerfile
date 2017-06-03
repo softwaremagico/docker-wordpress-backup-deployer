@@ -17,6 +17,9 @@ COPY config/php.ini /etc/php7/conf.d/zzz_custom.ini
 # Configure supervisord
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+#Backup VOLUME
+VOLUME /var/backup
+
 # wp-content volume
 VOLUME /var/www/wp-content
 WORKDIR /var/www/wp-content
@@ -48,6 +51,7 @@ COPY app/backup.sh /backup.sh
 RUN chown nobody.nobody /usr/src/wordpress/wp-secrets.php \
     && chmod 640 /usr/src/wordpress/wp-secrets.php \
     && chmod 640 /backup.sh \
+    && mkdir -p /var/backup
 
 #Copy backup
 ADD *wordpress_backup*.tar.gz /tmp/backup
