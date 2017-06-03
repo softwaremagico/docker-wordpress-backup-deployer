@@ -26,7 +26,6 @@ then
 	cp -r /usr/src/wordpress/wp-content /var/www/
 	chown -R nobody.nobody /var/www
 
-
 	echo 'Setting up mysql config'
 	MYSQL_RANDOM_ROOT_PASSWORD=`pwgen -s 40 1`;
 	MYSQL_WORDPRESS_USER_PASSWORD=`pwgen -s 40 1`;
@@ -45,16 +44,6 @@ then
 	#Copy passwords for next deploy
 	echo $MYSQL_RANDOM_ROOT_PASSWORD > $MYSQL_PASSWORD_FILE
 	echo $MYSQL_WORDPRESS_USER_PASSWORD >> $MYSQL_PASSWORD_FILE
-	
-	
-	#Update configuration files
-	echo 'Adding wordpress database configuration'
-	echo "define('DB_USER', '${MYSQL_WORDPRESS_USER}');" >> /usr/src/wordpress/wp-secrets.php
-	echo "define('DB_PASSWORD', '${MYSQL_WORDPRESS_USER_PASSWORD}');" >> /usr/src/wordpress/wp-secrets.php
-	echo "define('DB_HOST', 'localhost');" >> /usr/src/wordpress/wp-secrets.php
-	echo "define('DB_NAME', '${MYSQL_WORDPRESS_DATABASE}');" >> /usr/src/wordpress/wp-secrets.php
-	echo "define('DB_CHARSET', 'utf8');" >> /usr/src/wordpress/wp-secrets.php
-	echo "define('DB_COLLATE', '');" >> /usr/src/wordpress/wp-secrets.php
     
 	#Restore backup
 	echo 'Restoring database backup'
@@ -70,6 +59,15 @@ else
 	MYSQL_RANDOM_ROOT_PASSWORD=`head -1 ${MYSQL_PASSWORD_FILE}`;
 	MYSQL_WORDPRESS_USER_PASSWORD=`tail -1 ${MYSQL_PASSWORD_FILE}`;
 fi
+
+#Update configuration files
+echo 'Adding wordpress database configuration'
+echo "define('DB_USER', '${MYSQL_WORDPRESS_USER}');" >> /usr/src/wordpress/wp-secrets.php
+echo "define('DB_PASSWORD', '${MYSQL_WORDPRESS_USER_PASSWORD}');" >> /usr/src/wordpress/wp-secrets.php
+echo "define('DB_HOST', 'localhost');" >> /usr/src/wordpress/wp-secrets.php
+echo "define('DB_NAME', '${MYSQL_WORDPRESS_DATABASE}');" >> /usr/src/wordpress/wp-secrets.php
+echo "define('DB_CHARSET', 'utf8');" >> /usr/src/wordpress/wp-secrets.php
+echo "define('DB_COLLATE', '');" >> /usr/src/wordpress/wp-secrets.php
     
 #Get domain from variable set at docker run or use default value.
 if [ -z ${DOMAIN} ]; 
